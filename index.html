@@ -7,7 +7,7 @@
     <!-- Vinculación del Manifiesto PWA -->
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#0b0f19" id="metaThemeColor">
-    <style>
+  <style>
         /* Estilos Optimizados (Agrandados un 15% frente al ultra compacto) */
         :root {
             --bg-color: #0b0f19;
@@ -288,7 +288,7 @@
         <header>
             <div>
                 <h1>Precios Express</h1>
-                <p>Calculadora Adaptada</p>
+                <p>Calculadora Ultra Compacta</p>
             </div>
             <button class="btn-theme" id="btnThemeToggle" title="Cambiar Tema">🌙</button>
         </header>
@@ -310,7 +310,7 @@
         <div class="card">
             <div class="card-title">
                 <span>2. DÓLAR BCV (REDONDEADO)</span>
-                <span id="estadoTasa" style="font-size: 0.7rem; color: var(--accent-color);">Cargando BCV...</span>
+                <span id="estadoTasa" style="font-size: 0.62rem; color: var(--accent-color);">Cargando BCV...</span>
             </div>
             <input type="number" id="tasa" placeholder="Ej: 881" step="any" inputmode="decimal">
         </div>
@@ -320,7 +320,7 @@
             <div class="card-title">
                 <span>3. VENTA EN GRAMOS (G)</span>
                 <div class="switch-container">
-                    <span id="label-estado" style="font-size: 0.7rem; color: var(--text-muted);">Off</span>
+                    <span id="label-estado" style="font-size: 0.62rem; color: var(--text-muted);">Off</span>
                     <label class="switch">
                         <input type="checkbox" id="checkGramos">
                         <span class="slider"></span>
@@ -338,7 +338,7 @@
             <button class="btn-action" id="btnAddHistory">Agregar al Registro</button>
         </div>
 
-        <!-- Sección de Historial -->
+        <!-- Sección de Historial Compacto -->
         <div class="card history-section">
             <div class="history-header">
                 <h3>Registro de Cálculos</h3>
@@ -413,10 +413,13 @@
             calcular();
         });
 
+        // Obtención y redondeo automático hacia arriba (Ceil) de la Tasa BCV
         async function obtenerTasaBCV() {
             try {
                 let res = await fetch('https://ve.dolarapi.com/v1/dolares/oficial');
                 let data = await res.json();
+                
+                // Verificamos si la API devuelve el promedio o valor oficial
                 let valorOficial = data.promedio || data.price || data.value;
                 
                 if (valorOficial) {
