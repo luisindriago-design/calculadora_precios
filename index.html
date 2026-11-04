@@ -8,7 +8,6 @@
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#0b0f19" id="metaThemeColor">
     <style>
-        /* Estilos Compactos (-20% de espacio) */
         :root {
             --bg-color: #0b0f19;
             --card-bg: #131d31;
@@ -16,8 +15,8 @@
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --border-color: #1e293b;
-            --banner-bg: rgba(34, 197, 94, 0.1);
-            --banner-border: rgba(34, 197, 94, 0.3);
+            --banner-bg: rgba(34, 197, 94, 0.12);
+            --banner-border: rgba(34, 197, 94, 0.4);
             --total-gradient: linear-gradient(135deg, #1e293b, #0f172a);
         }
 
@@ -28,8 +27,8 @@
             --text-main: #0f172a;
             --text-muted: #64748b;
             --border-color: #cbd5e1;
-            --banner-bg: rgba(22, 163, 74, 0.08);
-            --banner-border: rgba(22, 163, 74, 0.2);
+            --banner-bg: rgba(22, 163, 74, 0.1);
+            --banner-border: rgba(22, 163, 74, 0.3);
             --total-gradient: linear-gradient(135deg, #dcfce7, #f0fdf4);
         }
 
@@ -57,7 +56,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         header h1 {
             font-size: 1.2rem;
@@ -80,6 +79,36 @@
             justify-content: center;
             font-size: 1rem;
         }
+        
+        /* Banner Gigante de Acumulado Arriba (+50% tamaño) */
+        .accumulated-banner-top {
+            background: var(--banner-bg);
+            border: 2px solid var(--banner-border);
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .accumulated-title-top {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .acc-usd-top {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            line-height: 1.2;
+        }
+        .acc-bs-top {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -197,35 +226,8 @@
         .history-header h3 {
             font-size: 0.9rem;
         }
-        .accumulated-banner {
-            background: var(--banner-bg);
-            border: 1px solid var(--banner-border);
-            border-radius: 8px;
-            padding: 8px 10px;
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .accumulated-title {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-        }
-        .accumulated-amounts {
-            text-align: right;
-        }
-        .acc-usd {
-            font-size: 1.05rem;
-            font-weight: bold;
-            color: var(--accent-color);
-        }
-        .acc-bs {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
         .history-list {
-            max-height: 160px;
+            max-height: 150px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
@@ -290,6 +292,13 @@
             <button class="btn-theme" id="btnThemeToggle" title="Cambiar Tema">🌙</button>
         </header>
 
+        <!-- BANNER DE ACUMULADO GIGANTE ARRIBA DE TODO -->
+        <div class="accumulated-banner-top">
+            <div class="accumulated-title-top">Total Acumulado General</div>
+            <div class="acc-usd-top" id="accumulatedUSD">$0.00</div>
+            <div class="acc-bs-top" id="accumulatedBs">Bs. 0.00</div>
+        </div>
+
         <!-- Caja 1: Costo -->
         <div class="card">
             <div class="card-title">1. COSTO DEL PRODUCTO ($)</div>
@@ -331,21 +340,9 @@
         <!-- Sección de Historial Compacto -->
         <div class="card history-section">
             <div class="history-header">
-                <h3>Registro</h3>
+                <h3>Registro de Cálculos</h3>
                 <button class="btn-clear-all" id="btnClearAll">Borrar Todo</button>
             </div>
-
-            <!-- Banner superior acumulado compacto -->
-            <div class="accumulated-banner">
-                <div>
-                    <div class="accumulated-title">Total Acumulado</div>
-                </div>
-                <div class="accumulated-amounts">
-                    <div class="acc-usd" id="accumulatedUSD">$0.00</div>
-                    <div class="acc-bs" id="accumulatedBs">Bs. 0.00</div>
-                </div>
-            </div>
-
             <div class="history-list" id="historyList">
                 <div class="empty-history">Sin registros aún.</div>
             </div>
