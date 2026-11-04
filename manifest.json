@@ -1,6 +1,6 @@
 {
   "name": "Precios Express",
-  "short_name": "Calculadora",
+  "short_name": "Calculadora De Precios",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0f172a",
