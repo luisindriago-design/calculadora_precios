@@ -8,6 +8,7 @@
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#0b0f19" id="metaThemeColor">
     <style>
+        /* Estilos Ultra Compactos (-30% adicional) */
         :root {
             --bg-color: #0b0f19;
             --card-bg: #131d31;
@@ -37,12 +38,12 @@
             margin: 0;
             padding: 0;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s;
         }
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            padding: 10px;
+            padding: 6px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -56,55 +57,55 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
         header h1 {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: var(--accent-color);
         }
         header p {
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             color: var(--text-muted);
         }
         .btn-theme {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             color: var(--text-main);
-            width: 32px;
-            height: 32px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 0.85rem;
         }
         
-        /* Banner Gigante de Acumulado Arriba (+50% tamaño) */
+        /* Banner Gigante de Acumulado Arriba (Optimizado -30%) */
         .accumulated-banner-top {
             background: var(--banner-bg);
-            border: 2px solid var(--banner-border);
-            border-radius: 12px;
-            padding: 14px 16px;
-            margin-bottom: 12px;
+            border: 1.5px solid var(--banner-border);
+            border-radius: 8px;
+            padding: 8px 10px;
+            margin-bottom: 8px;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
         }
         .accumulated-title-top {
-            font-size: 0.8rem;
+            font-size: 0.65rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
         .acc-usd-top {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-weight: bold;
             color: var(--accent-color);
-            line-height: 1.2;
+            line-height: 1.1;
         }
         .acc-bs-top {
-            font-size: 1.1rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             font-weight: 500;
         }
@@ -112,15 +113,15 @@
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 10px 12px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            padding: 6px 8px;
+            margin-bottom: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
         }
         .card-title {
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             color: var(--text-muted);
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -129,10 +130,10 @@
             width: 100%;
             background-color: var(--bg-color);
             border: 1px solid var(--border-color);
-            border-radius: 6px;
+            border-radius: 5px;
             color: var(--text-main);
-            font-size: 1.1rem;
-            padding: 7px 10px;
+            font-size: 0.95rem;
+            padding: 4px 8px;
             outline: none;
         }
         input[type="number"]:focus {
@@ -141,13 +142,13 @@
         .switch-container {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
         .switch {
             position: relative;
             display: inline-block;
-            width: 40px;
-            height: 20px;
+            width: 32px;
+            height: 16px;
         }
         .switch input { 
             opacity: 0;
@@ -159,40 +160,40 @@
             cursor: pointer;
             top: 0; left: 0; right: 0; bottom: 0;
             background-color: var(--border-color);
-            transition: .3s;
-            border-radius: 20px;
+            transition: .2s;
+            border-radius: 16px;
         }
         .slider:before {
             position: absolute;
             content: "";
-            height: 14px;
-            width: 14px;
+            height: 10px;
+            width: 10px;
             left: 3px;
             bottom: 3px;
             background-color: white;
-            transition: .3s;
+            transition: .2s;
             border-radius: 50%;
         }
         input:checked + .slider {
             background-color: var(--accent-color);
         }
         input:checked + .slider:before {
-            transform: translateX(20px);
+            transform: translateX(16px);
         }
         .total-box {
             background: var(--total-gradient);
             border: 1px solid var(--accent-color);
             text-align: center;
-            padding: 10px;
+            padding: 6px;
         }
         .total-value {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: bold;
             color: var(--accent-color);
-            margin: 2px 0;
+            margin: 1px 0;
         }
         .total-bs {
-            font-size: 0.9rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
         }
         .btn-action {
@@ -200,48 +201,48 @@
             background-color: var(--accent-color);
             color: #0b0f19;
             border: none;
-            border-radius: 6px;
-            padding: 9px;
-            font-size: 0.9rem;
+            border-radius: 5px;
+            padding: 6px;
+            font-size: 0.8rem;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 6px;
+            margin-top: 4px;
             transition: opacity 0.2s;
         }
         .btn-action:active {
             opacity: 0.8;
         }
-        /* Estilos del Historial compacto */
+        /* Estilos del Historial Ultra Compacto */
         .history-section {
-            margin-top: 10px;
+            margin-top: 6px;
         }
         .history-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
-            padding-bottom: 6px;
+            margin-bottom: 4px;
+            padding-bottom: 4px;
             border-bottom: 1px solid var(--border-color);
         }
         .history-header h3 {
-            font-size: 0.9rem;
+            font-size: 0.75rem;
         }
         .history-list {
-            max-height: 150px;
+            max-height: 110px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
         }
         .history-item {
             background-color: var(--bg-color);
             border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 6px 10px;
+            border-radius: 5px;
+            padding: 4px 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.8rem;
+            font-size: 0.72rem;
         }
         .history-info {
             display: flex;
@@ -254,30 +255,30 @@
         }
         .history-detail {
             color: var(--text-muted);
-            font-size: 0.7rem;
+            font-size: 0.65rem;
         }
         .btn-delete-item {
             background: transparent;
             border: none;
             color: #ef4444;
             cursor: pointer;
-            font-size: 1.1rem;
-            padding: 0 4px;
+            font-size: 0.95rem;
+            padding: 0 2px;
         }
         .btn-clear-all {
             background: transparent;
             border: 1px solid #ef4444;
             color: #ef4444;
-            padding: 3px 6px;
-            font-size: 0.7rem;
-            border-radius: 4px;
+            padding: 2px 4px;
+            font-size: 0.62rem;
+            border-radius: 3px;
             cursor: pointer;
         }
         .empty-history {
             text-align: center;
             color: var(--text-muted);
-            font-size: 0.8rem;
-            padding: 8px;
+            font-size: 0.7rem;
+            padding: 6px;
         }
     </style>
 </head>
@@ -287,7 +288,7 @@
         <header>
             <div>
                 <h1>Precios Express</h1>
-                <p>Calculadora Compacta</p>
+                <p>Calculadora Ultra Compacta</p>
             </div>
             <button class="btn-theme" id="btnThemeToggle" title="Cambiar Tema">🌙</button>
         </header>
@@ -309,7 +310,7 @@
         <div class="card">
             <div class="card-title">
                 <span>2. DÓLAR BCV (REDONDEADO)</span>
-                <span style="font-size: 0.7rem; color: var(--accent-color);">Redondeo Ceil</span>
+                <span style="font-size: 0.62rem; color: var(--accent-color);">Ceil</span>
             </div>
             <input type="number" id="tasa" placeholder="Ej: 881" step="any" inputmode="decimal">
         </div>
@@ -319,7 +320,7 @@
             <div class="card-title">
                 <span>3. VENTA EN GRAMOS (G)</span>
                 <div class="switch-container">
-                    <span id="label-estado" style="font-size: 0.7rem; color: var(--text-muted);">Off</span>
+                    <span id="label-estado" style="font-size: 0.62rem; color: var(--text-muted);">Off</span>
                     <label class="switch">
                         <input type="checkbox" id="checkGramos">
                         <span class="slider"></span>
