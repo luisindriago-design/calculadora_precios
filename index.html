@@ -6,31 +6,31 @@
     <title>Precios Express</title>
     <!-- Vinculación del Manifiesto PWA -->
     <link rel="manifest" href="./manifest.json">
-    <meta name="theme-color" content="#0f172a" id="metaThemeColor">
+    <meta name="theme-color" content="#0b0f19" id="metaThemeColor">
     <style>
-        /* Definición de Temas (Dark por defecto y Light) */
+        /* Definición de Temas (Dark con Verde y Light con Verde) */
         :root {
             --bg-color: #0b0f19;
             --card-bg: #131d31;
-            --accent-color: #38bdf8;
+            --accent-color: #22c55e; /* Verde principal */
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --border-color: #1e293b;
-            --banner-bg: rgba(56, 189, 248, 0.1);
-            --banner-border: rgba(56, 189, 248, 0.3);
+            --banner-bg: rgba(34, 197, 94, 0.1);
+            --banner-border: rgba(34, 197, 94, 0.3);
             --total-gradient: linear-gradient(135deg, #1e293b, #0f172a);
         }
 
         [data-theme="light"] {
             --bg-color: #f1f5f9;
             --card-bg: #ffffff;
-            --accent-color: #0284c7;
+            --accent-color: #16a34a; /* Verde más oscuro para modo claro */
             --text-main: #0f172a;
             --text-muted: #64748b;
             --border-color: #cbd5e1;
-            --banner-bg: rgba(2, 132, 199, 0.08);
-            --banner-border: rgba(2, 132, 199, 0.2);
-            --total-gradient: linear-gradient(135deg, #e0f2fe, #f0f9ff);
+            --banner-bg: rgba(22, 163, 74, 0.08);
+            --banner-border: rgba(22, 163, 74, 0.2);
+            --total-gradient: linear-gradient(135deg, #dcfce7, #f0fdf4);
         }
 
         * {
@@ -168,7 +168,7 @@
         .btn-action {
             width: 100%;
             background-color: var(--accent-color);
-            color: var(--bg-color);
+            color: #0b0f19;
             border: none;
             border-radius: 8px;
             padding: 12px;
@@ -360,7 +360,6 @@
         const btnThemeToggle = document.getElementById('btnThemeToggle');
         const metaThemeColor = document.getElementById('metaThemeColor');
 
-        // Cargar tema guardado previamente
         const savedTheme = localStorage.getItem('app_theme') || 'dark';
         setTheme(savedTheme);
 
@@ -378,11 +377,10 @@
                 metaThemeColor.setAttribute('content', '#f1f5f9');
             } else {
                 btnThemeToggle.textContent = '🌙';
-                metaThemeColor.setAttribute('content', '#0f172a');
+                metaThemeColor.setAttribute('content', '#0b0f19');
             }
         }
 
-        // Referencias de la calculadora
         const inputCosto = document.getElementById('costo');
         const inputTasa = document.getElementById('tasa');
         const checkGramos = document.getElementById('checkGramos');
