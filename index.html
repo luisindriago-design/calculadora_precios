@@ -6,8 +6,9 @@
     <title>Precios Express</title>
     <!-- Vinculación del Manifiesto PWA -->
     <link rel="manifest" href="./manifest.json">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="theme-color" content="#0f172a" id="metaThemeColor">
     <style>
+        /* Definición de Temas (Dark por defecto y Light) */
         :root {
             --bg-color: #0b0f19;
             --card-bg: #131d31;
@@ -15,12 +16,29 @@
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --border-color: #1e293b;
+            --banner-bg: rgba(56, 189, 248, 0.1);
+            --banner-border: rgba(56, 189, 248, 0.3);
+            --total-gradient: linear-gradient(135deg, #1e293b, #0f172a);
         }
+
+        [data-theme="light"] {
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --accent-color: #0284c7;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+            --banner-bg: rgba(2, 132, 199, 0.08);
+            --banner-border: rgba(2, 132, 199, 0.2);
+            --total-gradient: linear-gradient(135deg, #e0f2fe, #f0f9ff);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
         body {
             background-color: var(--bg-color);
@@ -36,16 +54,31 @@
             max-width: 480px;
         }
         header {
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 20px;
         }
         header h1 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--accent-color);
         }
         header p {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
+        }
+        .btn-theme {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
         }
         .card {
             background-color: var(--card-bg);
@@ -53,6 +86,7 @@
             border-radius: 12px;
             padding: 16px;
             margin-bottom: 14px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
         .card-title {
             font-size: 0.85rem;
@@ -95,7 +129,7 @@
             position: absolute;
             cursor: pointer;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #334155;
+            background-color: var(--border-color);
             transition: .3s;
             border-radius: 24px;
         }
@@ -117,7 +151,7 @@
             transform: translateX(22px);
         }
         .total-box {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
+            background: var(--total-gradient);
             border: 1px solid var(--accent-color);
             text-align: center;
         }
@@ -134,7 +168,7 @@
         .btn-action {
             width: 100%;
             background-color: var(--accent-color);
-            color: #0f172a;
+            color: var(--bg-color);
             border: none;
             border-radius: 8px;
             padding: 12px;
@@ -160,8 +194,8 @@
             border-bottom: 1px solid var(--border-color);
         }
         .accumulated-banner {
-            background: rgba(56, 189, 248, 0.1);
-            border: 1px solid rgba(56, 189, 248, 0.3);
+            background: var(--banner-bg);
+            border: 1px solid var(--banner-border);
             border-radius: 10px;
             padding: 10px 14px;
             margin-bottom: 12px;
@@ -194,7 +228,7 @@
             gap: 8px;
         }
         .history-item {
-            background-color: rgba(30, 41, 59, 0.5);
+            background-color: var(--bg-color);
             border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 8px 12px;
@@ -241,12 +275,15 @@
         }
     </style>
 </head>
-<body>
+<body data-theme="dark">
 
     <div class="container">
         <header>
-            <h1>Precios Express</h1>
-            <p>Calculadora con Historial y Acumulador</p>
+            <div>
+                <h1>Precios Express</h1>
+                <p>Calculadora con Historial y Acumulador</p>
+            </div>
+            <button class="btn-theme" id="btnThemeToggle" title="Cambiar Tema">🌙</button>
         </header>
 
         <!-- Caja 1: Costo -->
@@ -288,7 +325,7 @@
             <button class="btn-action" id="btnAddHistory">Agregar al Registro</button>
         </div>
 
-        <!-- Sección de Historial y Acumulador Visible Arriba -->
+        <!-- Sección de Historial y Acumulador -->
         <div class="card history-section">
             <div class="history-header">
                 <h3>Registro de Cálculos</h3>
@@ -318,6 +355,34 @@
             navigator.serviceWorker.register('./sw.js').catch(() => {});
         }
 
+        // Lógica de cambio de Tema (Dark / Light)
+        const bodyElement = document.body;
+        const btnThemeToggle = document.getElementById('btnThemeToggle');
+        const metaThemeColor = document.getElementById('metaThemeColor');
+
+        // Cargar tema guardado previamente
+        const savedTheme = localStorage.getItem('app_theme') || 'dark';
+        setTheme(savedTheme);
+
+        btnThemeToggle.addEventListener('click', () => {
+            let currentTheme = bodyElement.getAttribute('data-theme');
+            let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+            localStorage.setItem('app_theme', newTheme);
+        });
+
+        function setTheme(theme) {
+            bodyElement.setAttribute('data-theme', theme);
+            if (theme === 'light') {
+                btnThemeToggle.textContent = '☀️';
+                metaThemeColor.setAttribute('content', '#f1f5f9');
+            } else {
+                btnThemeToggle.textContent = '🌙';
+                metaThemeColor.setAttribute('content', '#0f172a');
+            }
+        }
+
+        // Referencias de la calculadora
         const inputCosto = document.getElementById('costo');
         const inputTasa = document.getElementById('tasa');
         const checkGramos = document.getElementById('checkGramos');
