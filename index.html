@@ -8,7 +8,7 @@
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#0b0f19" id="metaThemeColor">
     <style>
-        /* Estilos Ultra Compactos (-30% adicional) */
+        /* Estilos Ultra Compactos (-30%) */
         :root {
             --bg-color: #0b0f19;
             --card-bg: #131d31;
@@ -81,7 +81,7 @@
             font-size: 0.85rem;
         }
         
-        /* Banner Gigante de Acumulado Arriba (Optimizado -30%) */
+        /* Banner Gigante de Acumulado Arriba */
         .accumulated-banner-top {
             background: var(--banner-bg);
             border: 1.5px solid var(--banner-border);
@@ -212,7 +212,7 @@
         .btn-action:active {
             opacity: 0.8;
         }
-        /* Estilos del Historial Ultra Compacto */
+        /* Estilos del Historial Compacto */
         .history-section {
             margin-top: 6px;
         }
@@ -288,7 +288,7 @@
         <header>
             <div>
                 <h1>Precios Express</h1>
-                <p>Calculadora Ultra Compacta</p>
+                <p>Calculadora De Precios</p>
             </div>
             <button class="btn-theme" id="btnThemeToggle" title="Cambiar Tema">🌙</button>
         </header>
@@ -310,7 +310,7 @@
         <div class="card">
             <div class="card-title">
                 <span>2. DÓLAR BCV (REDONDEADO)</span>
-                <span style="font-size: 0.62rem; color: var(--accent-color);">Ceil</span>
+                <span id="estadoTasa" style="font-size: 0.62rem; color: var(--accent-color);">Cargando BCV...</span>
             </div>
             <input type="number" id="tasa" placeholder="Ej: 881" step="any" inputmode="decimal">
         </div>
@@ -385,6 +385,7 @@
         const checkGramos = document.getElementById('checkGramos');
         const inputGramos = document.getElementById('gramos');
         const labelEstado = document.getElementById('label-estado');
+        const estadoTasa = document.getElementById('estadoTasa');
         const divTotalUSD = document.getElementById('totalUSD');
         const divTotalBs = document.getElementById('totalBs');
         const btnAddHistory = document.getElementById('btnAddHistory');
@@ -412,16 +413,26 @@
             calcular();
         });
 
+        // Obtención y redondeo automático hacia arriba (Ceil) de la Tasa BCV
         async function obtenerTasaBCV() {
             try {
                 let res = await fetch('https://ve.dolarapi.com/v1/dolares/oficial');
                 let data = await res.json();
-                if (data && data.promedio) {
-                    let tasaRedondeada = Math.ceil(data.promedio);
+                
+                // Verificamos si la API devuelve el promedio o valor oficial
+                let valorOficial = data.promedio || data.price || data.value;
+                
+                if (valorOficial) {
+                    let tasaRedondeada = Math.ceil(valorOficial);
                     inputTasa.value = tasaRedondeada;
+                    estadoTasa.textContent = 'Ceil Automático';
                     calcular();
+                } else {
+                    estadoTasa.textContent = 'Manual (Error API)';
                 }
-            } catch (e) {}
+            } catch (e) {
+                estadoTasa.textContent = 'Modo Manual (Offline)';
+            }
         }
         obtenerTasaBCV();
 
