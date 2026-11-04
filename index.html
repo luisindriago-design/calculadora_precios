@@ -147,7 +147,7 @@
         .btn-action:active {
             opacity: 0.8;
         }
-        /* Estilos del Historial */
+        /* Estilos del Historial amigable */
         .history-section {
             margin-top: 20px;
         }
@@ -155,20 +155,36 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
         }
-        .history-header h3 {
-            font-size: 1rem;
-            color: var(--text-main);
+        .accumulated-banner {
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 10px;
+            padding: 10px 14px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .btn-clear-all {
-            background: transparent;
-            border: 1px solid #ef4444;
-            color: #ef4444;
-            padding: 4px 8px;
-            font-size: 0.75rem;
-            border-radius: 6px;
-            cursor: pointer;
+        .accumulated-title {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        .accumulated-amounts {
+            text-align: right;
+        }
+        .acc-usd {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        .acc-bs {
+            font-size: 0.85rem;
+            color: var(--text-muted);
         }
         .history-list {
             max-height: 220px;
@@ -205,17 +221,17 @@
             border: none;
             color: #ef4444;
             cursor: pointer;
-            font-size: 1.1rem;
-            padding: 0 4px;
+            font-size: 1.2rem;
+            padding: 0 6px;
         }
-        .history-summary {
-            margin-top: 12px;
-            padding-top: 10px;
-            border-top: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            font-weight: bold;
+        .btn-clear-all {
+            background: transparent;
+            border: 1px solid #ef4444;
+            color: #ef4444;
+            padding: 4px 8px;
+            font-size: 0.75rem;
+            border-radius: 6px;
+            cursor: pointer;
         }
         .empty-history {
             text-align: center;
@@ -272,27 +288,32 @@
             <button class="btn-action" id="btnAddHistory">Agregar al Registro</button>
         </div>
 
-        <!-- Sección de Historial y Acumulador -->
+        <!-- Sección de Historial y Acumulador Visible Arriba -->
         <div class="card history-section">
             <div class="history-header">
                 <h3>Registro de Cálculos</h3>
                 <button class="btn-clear-all" id="btnClearAll">Borrar Todo</button>
             </div>
+
+            <!-- Banner superior destacado con el Total Acumulado -->
+            <div class="accumulated-banner">
+                <div>
+                    <div class="accumulated-title">Total Acumulado</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">Suma de la lista</div>
+                </div>
+                <div class="accumulated-amounts">
+                    <div class="acc-usd" id="accumulatedUSD">$0.00</div>
+                    <div class="acc-bs" id="accumulatedBs">Bs. 0.00</div>
+                </div>
+            </div>
+
             <div class="history-list" id="historyList">
                 <div class="empty-history">No hay cálculos registrados aún.</div>
-            </div>
-            <div class="history-summary">
-                <span>Total Acumulado:</span>
-                <div>
-                    <span id="accumulatedUSD" style="color: var(--accent-color);">$0.00</span> / 
-                    <span id="accumulatedBs" style="color: var(--text-muted);">Bs. 0.00</span>
-                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Registrar Service Worker para offline
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('./sw.js').catch(() => {});
         }
@@ -311,9 +332,8 @@
         const accumulatedBs = document.getElementById('accumulatedBs');
 
         let historial = [];
-        let ultimoCalculo = { usd: 0, bs: 0, descripcion: '' };
+        let ultimoCalculo = { usd: 0, bs: 0, desc: '' };
 
-        // Habilitar/Deshabilitar caja de gramos
         checkGramos.addEventListener('change', () => {
             if (checkGramos.checked) {
                 inputGramos.disabled = false;
@@ -330,7 +350,6 @@
             calcular();
         });
 
-        // Automatizar Tasa BCV (Redondeo hacia arriba automático, pero editable)
         async function obtenerTasaBCV() {
             try {
                 let res = await fetch('https://ve.dolarapi.com/v1/dolares/oficial');
@@ -340,13 +359,10 @@
                     inputTasa.value = tasaRedondeada;
                     calcular();
                 }
-            } catch (e) {
-                // Si falla por internet, se mantiene vacío para que el usuario lo escriba manual
-            }
+            } catch (e) {}
         }
         obtenerTasaBCV();
 
-        // Lógica matemática principal
         function calcular() {
             let costo = parseFloat(inputCosto.value) || 0;
             let tasa = parseFloat(inputTasa.value) || 0;
@@ -354,7 +370,6 @@
 
             if (checkGramos.checked) {
                 let gramos = parseFloat(inputGramos.value) || 0;
-                // Si costo es por kilo (1000g), calculamos proporcional
                 totalUSD = (costo / 1000) * gramos;
             } else {
                 totalUSD = costo;
@@ -365,16 +380,14 @@
             divTotalUSD.textContent = `$ ${totalUSD.toFixed(2)}`;
             divTotalBs.textContent = `Bs. ${totalBs.toFixed(2)}`;
 
-            // Guardar contexto para el botón de agregar
             let desc = checkGramos.checked ? `${inputGramos.value || 0}g` : 'Unidad/Directo';
-            ultimoCalculo = { usd: totalUSD, bs: totalBs, desc: desc, costo: costo, tasa: tasa };
+            ultimoCalculo = { usd: totalUSD, bs: totalBs, desc: desc };
         }
 
         inputCosto.addEventListener('input', calcular);
         inputTasa.addEventListener('input', calcular);
         inputGramos.addEventListener('input', calcular);
 
-        // Funcionalidad del Historial
         btnAddHistory.addEventListener('click', () => {
             if (ultimoCalculo.usd <= 0) return;
 
@@ -388,7 +401,7 @@
             renderizarHistorial();
         });
 
-        function eliminarItem(id) {
+        window.eliminarItem = function(id) {
             historial = historial.filter(item => item.id !== id);
             renderizarHistorial();
         }
