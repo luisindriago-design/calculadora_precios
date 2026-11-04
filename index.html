@@ -8,11 +8,11 @@
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#0b0f19" id="metaThemeColor">
     <style>
-        /* Definición de Temas (Dark con Verde y Light con Verde) */
+        /* Estilos Compactos (-20% de espacio) */
         :root {
             --bg-color: #0b0f19;
             --card-bg: #131d31;
-            --accent-color: #22c55e; /* Verde principal */
+            --accent-color: #22c55e;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --border-color: #1e293b;
@@ -24,7 +24,7 @@
         [data-theme="light"] {
             --bg-color: #f1f5f9;
             --card-bg: #ffffff;
-            --accent-color: #16a34a; /* Verde más oscuro para modo claro */
+            --accent-color: #16a34a;
             --text-main: #0f172a;
             --text-muted: #64748b;
             --border-color: #cbd5e1;
@@ -43,7 +43,7 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            padding: 16px;
+            padding: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -57,41 +57,41 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }
         header h1 {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             color: var(--accent-color);
         }
         header p {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
         }
         .btn-theme {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             color: var(--text-main);
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 14px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
         }
         .card-title {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -100,10 +100,10 @@
             width: 100%;
             background-color: var(--bg-color);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 6px;
             color: var(--text-main);
-            font-size: 1.25rem;
-            padding: 10px 14px;
+            font-size: 1.1rem;
+            padding: 7px 10px;
             outline: none;
         }
         input[type="number"]:focus {
@@ -112,13 +112,13 @@
         .switch-container {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         .switch {
             position: relative;
             display: inline-block;
-            width: 46px;
-            height: 24px;
+            width: 40px;
+            height: 20px;
         }
         .switch input { 
             opacity: 0;
@@ -131,13 +131,13 @@
             top: 0; left: 0; right: 0; bottom: 0;
             background-color: var(--border-color);
             transition: .3s;
-            border-radius: 24px;
+            border-radius: 20px;
         }
         .slider:before {
             position: absolute;
             content: "";
-            height: 18px;
-            width: 18px;
+            height: 14px;
+            width: 14px;
             left: 3px;
             bottom: 3px;
             background-color: white;
@@ -148,21 +148,22 @@
             background-color: var(--accent-color);
         }
         input:checked + .slider:before {
-            transform: translateX(22px);
+            transform: translateX(20px);
         }
         .total-box {
             background: var(--total-gradient);
             border: 1px solid var(--accent-color);
             text-align: center;
+            padding: 10px;
         }
         .total-value {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: var(--accent-color);
-            margin: 4px 0;
+            margin: 2px 0;
         }
         .total-bs {
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--text-muted);
         }
         .btn-action {
@@ -170,41 +171,44 @@
             background-color: var(--accent-color);
             color: #0b0f19;
             border: none;
-            border-radius: 8px;
-            padding: 12px;
-            font-size: 1rem;
+            border-radius: 6px;
+            padding: 9px;
+            font-size: 0.9rem;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 5px;
+            margin-top: 6px;
             transition: opacity 0.2s;
         }
         .btn-action:active {
             opacity: 0.8;
         }
-        /* Estilos del Historial amigable */
+        /* Estilos del Historial compacto */
         .history-section {
-            margin-top: 20px;
+            margin-top: 10px;
         }
         .history-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
+            margin-bottom: 8px;
+            padding-bottom: 6px;
             border-bottom: 1px solid var(--border-color);
+        }
+        .history-header h3 {
+            font-size: 0.9rem;
         }
         .accumulated-banner {
             background: var(--banner-bg);
             border: 1px solid var(--banner-border);
-            border-radius: 10px;
-            padding: 10px 14px;
-            margin-bottom: 12px;
+            border-radius: 8px;
+            padding: 8px 10px;
+            margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         .accumulated-title {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             text-transform: uppercase;
         }
@@ -212,35 +216,35 @@
             text-align: right;
         }
         .acc-usd {
-            font-size: 1.2rem;
+            font-size: 1.05rem;
             font-weight: bold;
             color: var(--accent-color);
         }
         .acc-bs {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
         }
         .history-list {
-            max-height: 220px;
+            max-height: 160px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
         .history-item {
             background-color: var(--bg-color);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 8px 12px;
+            border-radius: 6px;
+            padding: 6px 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
         .history-info {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 1px;
         }
         .history-prices {
             color: var(--accent-color);
@@ -248,30 +252,30 @@
         }
         .history-detail {
             color: var(--text-muted);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
         }
         .btn-delete-item {
             background: transparent;
             border: none;
             color: #ef4444;
             cursor: pointer;
-            font-size: 1.2rem;
-            padding: 0 6px;
+            font-size: 1.1rem;
+            padding: 0 4px;
         }
         .btn-clear-all {
             background: transparent;
             border: 1px solid #ef4444;
             color: #ef4444;
-            padding: 4px 8px;
-            font-size: 0.75rem;
-            border-radius: 6px;
+            padding: 3px 6px;
+            font-size: 0.7rem;
+            border-radius: 4px;
             cursor: pointer;
         }
         .empty-history {
             text-align: center;
             color: var(--text-muted);
-            font-size: 0.85rem;
-            padding: 12px;
+            font-size: 0.8rem;
+            padding: 8px;
         }
     </style>
 </head>
@@ -281,7 +285,7 @@
         <header>
             <div>
                 <h1>Precios Express</h1>
-                <p>Calculadora con Historial y Acumulador</p>
+                <p>Calculadora Compacta</p>
             </div>
             <button class="btn-theme" id="btnThemeToggle" title="Cambiar Tema">🌙</button>
         </header>
@@ -296,7 +300,7 @@
         <div class="card">
             <div class="card-title">
                 <span>2. DÓLAR BCV (REDONDEADO)</span>
-                <span style="font-size: 0.75rem; color: var(--accent-color);">Redondeo Ceil Activo</span>
+                <span style="font-size: 0.7rem; color: var(--accent-color);">Redondeo Ceil</span>
             </div>
             <input type="number" id="tasa" placeholder="Ej: 881" step="any" inputmode="decimal">
         </div>
@@ -306,37 +310,35 @@
             <div class="card-title">
                 <span>3. VENTA EN GRAMOS (G)</span>
                 <div class="switch-container">
-                    <span id="label-estado" style="font-size: 0.75rem; color: var(--text-muted);">Desactivado</span>
+                    <span id="label-estado" style="font-size: 0.7rem; color: var(--text-muted);">Off</span>
                     <label class="switch">
                         <input type="checkbox" id="checkGramos">
                         <span class="slider"></span>
                     </label>
                 </div>
             </div>
-            <input type="number" id="gramos" placeholder="Ej: 250 (gramos)" step="any" inputmode="numeric" disabled style="opacity: 0.5;">
-            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 6px;">* Actívalo si la Caja 1 corresponde al precio por kilo (1000g).</div>
+            <input type="number" id="gramos" placeholder="Ej: 250" step="any" inputmode="numeric" disabled style="opacity: 0.5;">
         </div>
 
         <!-- Caja 4: Total -->
         <div class="card total-box">
-            <div class="card-title" style="color: var(--text-muted);">4. TOTAL CALCULADO</div>
+            <div class="card-title" style="color: var(--text-muted); justify-content: center;">4. TOTAL CALCULADO</div>
             <div class="total-value" id="totalUSD">$ 0.00</div>
             <div class="total-bs" id="totalBs">Bs. 0.00</div>
             <button class="btn-action" id="btnAddHistory">Agregar al Registro</button>
         </div>
 
-        <!-- Sección de Historial y Acumulador -->
+        <!-- Sección de Historial Compacto -->
         <div class="card history-section">
             <div class="history-header">
-                <h3>Registro de Cálculos</h3>
+                <h3>Registro</h3>
                 <button class="btn-clear-all" id="btnClearAll">Borrar Todo</button>
             </div>
 
-            <!-- Banner superior destacado con el Total Acumulado -->
+            <!-- Banner superior acumulado compacto -->
             <div class="accumulated-banner">
                 <div>
                     <div class="accumulated-title">Total Acumulado</div>
-                    <div style="font-size: 0.75rem; color: var(--text-muted);">Suma de la lista</div>
                 </div>
                 <div class="accumulated-amounts">
                     <div class="acc-usd" id="accumulatedUSD">$0.00</div>
@@ -345,7 +347,7 @@
             </div>
 
             <div class="history-list" id="historyList">
-                <div class="empty-history">No hay cálculos registrados aún.</div>
+                <div class="empty-history">Sin registros aún.</div>
             </div>
         </div>
     </div>
@@ -355,7 +357,6 @@
             navigator.serviceWorker.register('./sw.js').catch(() => {});
         }
 
-        // Lógica de cambio de Tema (Dark / Light)
         const bodyElement = document.body;
         const btnThemeToggle = document.getElementById('btnThemeToggle');
         const metaThemeColor = document.getElementById('metaThemeColor');
@@ -401,13 +402,13 @@
             if (checkGramos.checked) {
                 inputGramos.disabled = false;
                 inputGramos.style.opacity = '1';
-                labelEstado.textContent = 'Activo';
+                labelEstado.textContent = 'On';
                 labelEstado.style.color = 'var(--accent-color)';
             } else {
                 inputGramos.disabled = true;
                 inputGramos.style.opacity = '0.5';
                 inputGramos.value = '';
-                labelEstado.textContent = 'Desactivado';
+                labelEstado.textContent = 'Off';
                 labelEstado.style.color = 'var(--text-muted)';
             }
             calcular();
@@ -443,7 +444,7 @@
             divTotalUSD.textContent = `$ ${totalUSD.toFixed(2)}`;
             divTotalBs.textContent = `Bs. ${totalBs.toFixed(2)}`;
 
-            let desc = checkGramos.checked ? `${inputGramos.value || 0}g` : 'Unidad/Directo';
+            let desc = checkGramos.checked ? `${inputGramos.value || 0}g` : 'Unidad';
             ultimoCalculo = { usd: totalUSD, bs: totalBs, desc: desc };
         }
 
@@ -478,7 +479,7 @@
             historyList.innerHTML = '';
 
             if (historial.length === 0) {
-                historyList.innerHTML = '<div class="empty-history">No hay cálculos registrados aún.</div>';
+                historyList.innerHTML = '<div class="empty-history">Sin registros aún.</div>';
                 accumulatedUSD.textContent = '$0.00';
                 accumulatedBs.textContent = 'Bs. 0.00';
                 return;
@@ -496,7 +497,7 @@
                 div.innerHTML = `
                     <div class="history-info">
                         <span class="history-prices">$${item.usd.toFixed(2)} / Bs.${item.bs.toFixed(2)}</span>
-                        <span class="history-detail">Modo: ${item.desc}</span>
+                        <span class="history-detail">${item.desc}</span>
                     </div>
                     <button class="btn-delete-item" onclick="eliminarItem(${item.id})">&times;</button>
                 `;
